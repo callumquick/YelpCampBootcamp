@@ -1,0 +1,12 @@
+
+body {
+    color:black;
+    background: #394cab;
+}
+
+.content {
+    margin:10% auto;
+    width: 80%;
+    min-width: 400px;
+    max-width: 500px;
+}

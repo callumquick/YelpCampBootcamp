@@ -1,0 +1,16 @@
+body {
+    background: #454545;
+    color: white;
+}
+
+.campform {
+    margin: 15px auto;
+    width: 60%;
+    max-width: 500px;
+    min-width: 300px;
+    text-align: center;
+}
+
+#listings {
+    margin: 20px
+}
