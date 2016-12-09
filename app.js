@@ -24,7 +24,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:false}));
 
 app.get("/", function(req, res){
-	res.render("home");
+    res.render("home");
 });
 
 app.get("/campsites", function(req, res){
