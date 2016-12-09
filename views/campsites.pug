@@ -1,17 +1,17 @@
 extends template.pug
 
 block title
-    title Campsites on YelpCamp
+	title Campsites on YelpCamp
 
 block body
-    include includes/navbar.pug
-    .container
-        h1#listings Listings of Campsites
-        div.row
-            each campsite in campsites
-                div.col-sm-6.col-md-3
-                    div.thumbnail
-                        a(href="/campsites/"+campsite._id)
-                            img.img-responsive(src=campsite.image)
-                        span.caption 
-                            h4.text-center= campsite.name
+	include includes/navbar.pug
+	.container
+		h1#listings Listings of Campsites
+		div.row
+			each campsite in campsites
+				div.col-sm-6.col-md-3
+					div.thumbnail
+						a(href="/campsites/"+campsite._id)
+							img.img-responsive(src=campsite.image)
+						span.caption 
+							h4.text-center= campsite.name
