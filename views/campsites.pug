@@ -11,6 +11,7 @@ block body
             each campsite in campsites
                 div.col-sm-6.col-md-3
                     div.thumbnail
-                        img.img-responsive(src=campsite.image)
+                        a(href="/campsites/"+campsite._id)
+                            img.img-responsive(src=campsite.image)
                         span.caption 
                             h4.text-center= campsite.name

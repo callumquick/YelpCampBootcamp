@@ -41,15 +41,12 @@ app.get("/campsites", function(req, res){
 	});
 });
 
-app.get("/new", function(req,res){
-    res.render("new");
-});
-
 app.post("/campsites", function(req, res){
     var campsiteObj = req.body;
 	Campsite.create({
 			name: campsiteObj.name,
-			image: campsiteObj.image
+			image: campsiteObj.image,
+            description: campsiteObj.description
 		},function(err,campsite){
 			if (err) {console.log(err)} else {
 				console.log("Successfully created posted campsite.");
@@ -58,8 +55,24 @@ app.post("/campsites", function(req, res){
     res.redirect("/campsites");
 });
 
-app.get("/campsites/:id", function(req, res){
-	res.render("show", {campsite: campsites[0]});
+app.get("/campsites/new", function(req,res){
+    res.render("new");
+});
+
+app.get("/campsites/:Id", function(req, res){
+	var newId = req.params.Id
+	Campsite.findOne({_id:newId}, function(err,campsite){
+		if (err) {
+			res.send(err);
+		} else {
+			console.log("Got campsite by ID:" + campsite);
+			res.render("show", {campsite: campsite});
+		}
+	});
+});
+
+app.get("*", function(req, res){
+	res.send("This page is unavailable, please check your URL.");
 });
 
 app.listen(port, function(){
