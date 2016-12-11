@@ -64,10 +64,10 @@ app.get("/campsites/:id", function(req, res){
 			res.render("show", {campsite: campsite});
 		}
 	});
+});
   
 app.get("*", function(req, res){
 	res.send("This page is unavailable, please check your URL.");
-
 });
 
 app.listen(port, function(){
