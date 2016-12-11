@@ -1,16 +1,18 @@
 extends template.pug
 
 block title
-    title Add New Campsite
-    
+	title Add New Campsite
+	
 block body
-    include includes/navbar.pug
-    h1.campform Add a New Campsite
-    form(action="/campsites" method="POST")
-        div.campform
-            div.form-group
-                input.form-control(type="text" name="name" placeholder="Campsite Name")
-            div.form-group    
-                input.form-control(type="text" name="image" placeholder="Campsite Image URL")
-            div.form-group    
-                button.btn.btn-info.btn-lg(type="submit") Add Your Campsite!
+	include includes/navbar.pug
+	h1.campform Add a New Campsite
+	form(action="/campsites" method="POST")
+		div.campform
+			div.form-group
+				input.form-control(type="text" name="name" placeholder="Campsite Name")
+			div.form-group    
+				input.form-control(type="text" name="image" placeholder="Campsite Image URL")
+			div.form-group
+				textarea.form-control(name="description" placeholder="Campsite Description")
+			div.form-group    
+				button.btn.btn-info.btn-lg(type="submit") Add Your Campsite!
