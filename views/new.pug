@@ -9,8 +9,13 @@ block body
     form(action="/campsites" method="POST")
         div.campform
             div.form-group
+                label Campsite Name:
                 input.form-control(type="text" name="name" placeholder="Campsite Name")
-            div.form-group    
+            div.form-group 
+                label Image URL:   
                 input.form-control(type="text" name="image" placeholder="Campsite Image URL")
+            div.form-group 
+                label Description:  
+                textarea.form-control(name="description" placeholder="Describe the site...")
             div.form-group    
                 button.btn.btn-info.btn-lg(type="submit") Add Your Campsite!

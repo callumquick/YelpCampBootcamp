@@ -28,14 +28,10 @@ app.get("/", function(req, res){
 });
 
 app.get("/campsites", function(req, res){
-	var campsitesList = [];
 	Campsite.find({}, function(err,campsites){
 		if(err) {console.log(err)} else {
-			campsites.forEach(function(campsite){
-				campsitesList.push(campsite);
-			});
 			res.render("campsites",{
-				campsites: campsitesList
+				campsites: campsites
 			});
 		}
 	});
@@ -49,7 +45,8 @@ app.post("/campsites", function(req, res){
     var campsiteObj = req.body;
 	Campsite.create({
 			name: campsiteObj.name,
-			image: campsiteObj.image
+			image: campsiteObj.image,
+			description: campsiteObj.description
 		},function(err,campsite){
 			if (err) {console.log(err)} else {
 				console.log("Successfully created posted campsite.");
@@ -59,7 +56,14 @@ app.post("/campsites", function(req, res){
 });
 
 app.get("/campsites/:id", function(req, res){
-	res.render("show", {campsite: campsites[0]});
+	Campsite.findById(req.params.id, function(err, campsite){
+		if (err) {
+			console.log(err);
+			res.redirect("/campsites");
+		} else {
+			res.render("show", {campsite: campsite});
+		}
+	});
 });
 
 app.listen(port, function(){

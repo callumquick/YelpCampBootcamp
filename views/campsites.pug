@@ -10,7 +10,8 @@ block body
         div.row
             each campsite in campsites
                 div.col-sm-6.col-md-3
-                    div.thumbnail
-                        img.img-responsive(src=campsite.image)
-                        span.caption 
-                            h4.text-center= campsite.name
+                    a(href="/campsites/"+campsite.id)
+                        div.thumbnail
+                            img.img-responsive(src=campsite.image)
+                            span.caption 
+                                h4.text-center= campsite.name
