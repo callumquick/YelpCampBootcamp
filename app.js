@@ -4,12 +4,12 @@ var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var port = 3000;
 var campsites = [{
-        name: "Salmon Creek",
-        image: "https://images.pexels.com/photos/192518/pexels-photo-192518.jpeg?h=350&auto=compress",
-    },{
-        name: "Fisherman's Wood",
-        image: "https://images.pexels.com/photos/104864/pexels-photo-104864.jpeg?h=350&auto=compress"
-    }];
+		name: "Salmon Creek",
+		image: "https://images.pexels.com/photos/192518/pexels-photo-192518.jpeg?h=350&auto=compress",
+	},{
+		name: "Fisherman's Wood",
+		image: "https://images.pexels.com/photos/104864/pexels-photo-104864.jpeg?h=350&auto=compress"
+	}];
 
 mongoose.connect("mongodb://localhost/yelpcamp");
 var campsiteSchema = new mongoose.Schema({
@@ -37,12 +37,8 @@ app.get("/campsites", function(req, res){
 	});
 });
 
-app.get("/new", function(req,res){
-    res.render("new");
-});
-
 app.post("/campsites", function(req, res){
-    var campsiteObj = req.body;
+	var campsiteObj = req.body;
 	Campsite.create({
 			name: campsiteObj.name,
 			image: campsiteObj.image,
@@ -52,7 +48,11 @@ app.post("/campsites", function(req, res){
 				console.log("Successfully created posted campsite.");
 			}
 	});
-    res.redirect("/campsites");
+	res.redirect("/campsites");
+});
+
+app.get("/campsites/new", function(req,res){
+	res.render("new");
 });
 
 app.get("/campsites/:id", function(req, res){
@@ -64,8 +64,12 @@ app.get("/campsites/:id", function(req, res){
 			res.render("show", {campsite: campsite});
 		}
 	});
+  
+app.get("*", function(req, res){
+	res.send("This page is unavailable, please check your URL.");
+
 });
 
 app.listen(port, function(){
-    console.log("Serving YelpCamp on port "+port+".");
+	console.log("Serving YelpCamp on port "+port+".");
 });
