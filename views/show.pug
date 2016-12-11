@@ -7,5 +7,5 @@ block body
 	include includes/navbar.pug
 	.container
 		h1= campsite.name
-		h4= campsite.description
-		img.thumbnail(src=campsite["image"])
+		img.thumbnail(src=campsite.image)
+		p= campsite.description

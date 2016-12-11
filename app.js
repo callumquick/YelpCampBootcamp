@@ -28,14 +28,10 @@ app.get("/", function(req, res){
 });
 
 app.get("/campsites", function(req, res){
-	var campsitesList = [];
 	Campsite.find({}, function(err,campsites){
 		if(err) {console.log(err)} else {
-			campsites.forEach(function(campsite){
-				campsitesList.push(campsite);
-			});
 			res.render("campsites",{
-				campsites: campsitesList
+				campsites: campsites
 			});
 		}
 	});
@@ -59,20 +55,19 @@ app.get("/campsites/new", function(req,res){
 	res.render("new");
 });
 
-app.get("/campsites/:Id", function(req, res){
-	var newId = req.params.Id
-	Campsite.findOne({_id:newId}, function(err,campsite){
+app.get("/campsites/:id", function(req, res){
+	Campsite.findById(req.params.id, function(err, campsite){
 		if (err) {
-			res.send(err);
+			console.log(err);
+			res.redirect("/campsites");
 		} else {
-			console.log("Got campsite by ID:" + campsite);
 			res.render("show", {campsite: campsite});
 		}
 	});
-});
-
+  
 app.get("*", function(req, res){
 	res.send("This page is unavailable, please check your URL.");
+
 });
 
 app.listen(port, function(){
