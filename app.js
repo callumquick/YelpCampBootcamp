@@ -1,23 +1,13 @@
-var express = require("express");
-var app = express();
-var mongoose = require("mongoose");
-var bodyParser = require("body-parser");
-var port = 3000;
-var campsites = [{
-		name: "Salmon Creek",
-		image: "https://images.pexels.com/photos/192518/pexels-photo-192518.jpeg?h=350&auto=compress",
-	},{
-		name: "Fisherman's Wood",
-		image: "https://images.pexels.com/photos/104864/pexels-photo-104864.jpeg?h=350&auto=compress"
-	}];
+var express 	= require("express");
+var app 		= express();
+var mongoose 	= require("mongoose");
+var bodyParser 	= require("body-parser");
+var Campsite 	= require("./models/campsite");
+var seedDB 		= require("./seeds.js");
+var port 		= 3000;
 
+seedDB();
 mongoose.connect("mongodb://localhost/yelpcamp");
-var campsiteSchema = new mongoose.Schema({
-	name: String,
-	image: String,
-	description: String
-});
-var Campsite = mongoose.model("Campsite", campsiteSchema); 
 
 app.set("view engine","pug");
 app.use(express.static("public"));
