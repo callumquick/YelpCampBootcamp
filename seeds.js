@@ -9,7 +9,7 @@ var data = [
         description: "Great place for watching eagles I guess, but they tend to cover your tent in loads of bird shit."
     },
     {
-       name: "Trout's Palace",
+        name: "Trout's Palace",
         image: "https://images.pexels.com/photos/29818/pexels-photo-29818.jpg?h=350&auto=compress",
         description: "Great place for catching trout I guess, but they tend to slip out your hands and nip your pecker." 
     },
@@ -25,7 +25,12 @@ var seedDB = function(){
         if (err) {
             console.log(err);
         }
-        console.log("Removed campsites!")
+        Comment.remove({}, function(err) {
+            if(err) {
+                console.log(err);
+            }
+        });
+        console.log("Removed campsites and comments!")
         data.forEach(function(seed){
             Campsite.create(seed, function(err, campsite){
                 if(err) {
@@ -33,8 +38,8 @@ var seedDB = function(){
                 } else {
                     console.log("Created campsite: "+campsite.name);
                     Comment.create({
-                        text: "This campsite is OK I guess.",
-                        author: "Deez Nutz"
+                        text: campsite.name + " is OK I guess.",
+                        author: "Guy at " + campsite.name
                     }, function(err, comment){
                         if (err) {
                             console.log(err)

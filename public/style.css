@@ -1,6 +1,10 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+@import url(/bower_components/font-awesome/css/font-awesome.min.css);
+
 body {
-    background: #454545;
-    color: white;
+    background: #ECECEF;
+    color: #121212;
+    font-family: Raleway;
 }
 
 .campform {
@@ -11,11 +15,47 @@ body {
     text-align: center;
 }
 
-#listings {
-    margin: 20px
+#indexJumbotron {
+    background: white;
 }
 
 .campsitethumb {
     display: inline-block;
-    height: 250px;
+}
+
+.campsite-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.black {
+    color: black;
+}
+
+.bold {
+    font-weight: 800;
+}
+
+#addCommentBtn {
+    margin-bottom: 10px;
+}
+.well.comment-well {
+    margin: 5px auto;
+    padding: 5px 20px;
+}
+
+span.dateAgo {
+    font-size: 0.7em;
+}
+
+#campsiteBio {
+    padding: 0;
+}
+
+#campsiteImg {
+    width: 100%;
+}
+
+#imgCaption {
+    padding: 13px;
 }

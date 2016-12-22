@@ -1,0 +1,36 @@
+extends ../template.pug
+
+block title
+	title= campsite.name
+	
+block body
+	include ../includes/navbar.pug
+	.container
+		.row
+			.col-md-3
+				p.lead YelpCamp
+				.list-group
+					li.list-group-item.active Item 1
+					li.list-group-item Item 2
+					li.list-group-item Item 3
+			.col-md-9
+				.thumbnail#campsiteBio
+					img.img-responsive#campsiteImg(src=campsite.image)
+					.caption-full#imgCaption
+						h4.pull-right £9.00/night
+						a(href="#")
+							h3.black= campsite.name
+						p= campsite.description
+		h3#commentHeader Comments 
+			i.fa.fa-comments
+		a.btn.btn-success#addCommentBtn(href="/campsites/"+campsite._id+"/comments/new") Add Comment 
+			i.fa.fa-plus
+		each comment in campsite.comments
+			.container.black.well.comment-well
+				h4.bold= comment.author
+					span.pull-right.dateAgo Ten days ago
+				p
+					i.fa.fa-comment-o
+					=" " +comment.text
+		br
+		br

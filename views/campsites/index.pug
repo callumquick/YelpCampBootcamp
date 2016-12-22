@@ -1,0 +1,20 @@
+extends ../template.pug
+
+block title
+	title Campsites on YelpCamp
+
+block body
+	include ../includes/navbar.pug
+	.container
+		.jumbotron#indexJumbotron
+			h1 Listings of Campsites
+			h4 Peruse our listings of campsites from across the world!
+		div.row.campsite-row
+			each campsite in campsites
+				div.col-sm-6.col-md-3
+					a(href="/campsites/"+campsite.id)
+						div.thumbnail.campsitethumb
+							img.img-responsive(src=campsite.image)
+							span.caption 
+								h4.text-center= campsite.name
+
