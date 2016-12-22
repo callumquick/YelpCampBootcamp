@@ -3,6 +3,7 @@ var app 		= express();
 var mongoose 	= require("mongoose");
 var bodyParser 	= require("body-parser");
 var Campsite 	= require("./models/campsite");
+var Comment 	= require("./models/comment.js");
 var seedDB 		= require("./seeds.js");
 var port 		= 3000;
 
@@ -46,7 +47,8 @@ app.get("/campsites/new", function(req,res){
 });
 
 app.get("/campsites/:id", function(req, res){
-	Campsite.findById(req.params.id, function(err, campsite){
+	Campsite.findById(req.params.id).populate("comments").exec(function(err, campsite){
+		console.log(campsite);
 		if (err) {
 			console.log(err);
 			res.redirect("/campsites");

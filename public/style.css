@@ -14,3 +14,8 @@ body {
 #listings {
     margin: 20px
 }
+
+.campsitethumb {
+    display: inline-block;
+    height: 250px;
+}
