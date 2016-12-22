@@ -12,10 +12,10 @@ body {
     width: 60%;
     max-width: 500px;
     min-width: 300px;
-    text-align: center;
+    text-align: left;
 }
 
-#indexJumbotron {
+.white-jumbotron {
     background: white;
 }
 
