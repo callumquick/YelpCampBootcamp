@@ -2,9 +2,12 @@ var express 	= require("express");
 var app 		= express();
 var mongoose 	= require("mongoose");
 var bodyParser 	= require("body-parser");
+var passport	= require("passport");
+var LocalStrategy = require("passport-local");
 var Campsite 	= require("./models/campsite");
-var Comment 	= require("./models/comment.js");
-var seedDB 		= require("./seeds.js");
+var Comment 	= require("./models/comment");
+var User		= require("./models/user")
+var seedDB 		= require("./seeds");
 var port 		= 3000;
 
 seedDB();
