@@ -19,7 +19,7 @@ var campsiteRoutes 	= require("./routes/campsites"),
 //DATABASE CONFIG
 //===============
 
-seedDB();
+// seedDB();
 mongoose.connect("mongodb://localhost/yelpcamp");
 
 //==============
@@ -59,7 +59,7 @@ app.use(function(req, res, next){
 
 app.use("/campsites/:id/comments", commentRoutes);
 app.use("/campsites", campsiteRoutes);
-app.use("/", indexRoutes);
+app.use("/", indexRoutes); //has wildcard route, use last
 
 //=======
 //SERVER

@@ -30,7 +30,7 @@ router.post("/register", function(req, res){
 	});
 });
 
-//GET login form
+//Get login form
 router.get("/login", function(req, res){
 	res.render("login");
 });

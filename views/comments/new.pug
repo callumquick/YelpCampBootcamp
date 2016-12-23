@@ -10,11 +10,7 @@ block body
 			=campsite.name
 		form(action="/campsites/"+campsite._id+"/comments" method="POST")
 			div.campform.well
-				div.form-group
-					label Author:
-					input.form-control(type="text" name="author" placeholder="Your Name")
 				div.form-group 
-					label Comment:  
 					textarea.form-control(name="text" placeholder="Your comment...")
 				div.form-group    
 					button.btn.btn-info.btn-lg(type="submit") Comment

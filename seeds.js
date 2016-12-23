@@ -31,27 +31,27 @@ var seedDB = function(){
             }
         });
         console.log("Removed campsites and comments!")
-        data.forEach(function(seed){
-            Campsite.create(seed, function(err, campsite){
-                if(err) {
-                    console.log(err);
-                } else {
-                    console.log("Created campsite: "+campsite.name);
-                    Comment.create({
-                        text: campsite.name + " is OK I guess.",
-                        author: "Guy at " + campsite.name
-                    }, function(err, comment){
-                        if (err) {
-                            console.log(err)
-                        } else {
-                            campsite.comments.push(comment);
-                            campsite.save();
-                            console.log("Created new comment by: " + comment.author);
-                        }
-                    });
-                }
-            });
-        });
+        // data.forEach(function(seed){
+        //     Campsite.create(seed, function(err, campsite){
+        //         if(err) {
+        //             console.log(err);
+        //         } else {
+        //             console.log("Created campsite: "+campsite.name);
+        //             Comment.create({
+        //                 text: campsite.name + " is OK I guess.",
+        //                 author: "Guy at " + campsite.name
+        //             }, function(err, comment){
+        //                 if (err) {
+        //                     console.log(err)
+        //                 } else {
+        //                     campsite.comments.push(comment);
+        //                     campsite.save();
+        //                     console.log("Created new comment by: " + comment.author);
+        //                 }
+        //             });
+        //         }
+        //     });
+        // });
     });
 }
 
