@@ -10,6 +10,11 @@ var User		= require("./models/user")
 var seedDB 		= require("./seeds");
 var port 		= 3000;
 
+//Route dependencies
+var campsiteRoutes 	= require("./routes/campsites"),
+	commentRoutes 	= require("./routes/comments"),
+	indexRoutes 	= require("./routes/index");
+
 //===============
 //DATABASE CONFIG
 //===============
@@ -48,160 +53,13 @@ app.use(function(req, res, next){
 	next();
 });
 
-//Root route
-app.get("/", function(req, res){
-    res.render("home");
-});
+//======
+//ROUTES
+//======
 
-//===============
-//CAMPSITE ROUTES
-//===============
-
-//Index route
-app.get("/campsites", function(req, res){
-	Campsite.find({}, function(err,campsites){
-		if(err) {console.log(err)} else {
-			res.render("campsites/index",{
-				campsites: campsites
-			});
-		}
-	});
-});
-
-//Create route
-app.post("/campsites", function(req, res){
-	var campsiteObj = req.body;
-	Campsite.create({
-			name: campsiteObj.name,
-			image: campsiteObj.image,
-			description: campsiteObj.description
-		},function(err,campsite){
-			if (err) {console.log(err)} else {
-				console.log("Successfully created posted campsite.");
-			}
-	});
-	res.redirect("/campsites");
-});
-
-//New route
-app.get("/campsites/new", function(req,res){
-	res.render("campsites/new");
-});
-
-//Show route
-app.get("/campsites/:id", function(req, res){
-	Campsite
-	.findById(req.params.id)
-	.populate("comments")
-	.exec(function(err, campsite){
-		if (err) {
-			console.log(err);
-			res.redirect("/campsites");
-		} else {
-			res.render("campsites/show", {campsite: campsite});
-		}
-	});
-});
-
-//==============
-//COMMENT ROUTES
-//==============
-
-//New route
-app.get("/campsites/:id/comments/new", isLoggedIn, function(req, res){
-	Campsite.findById(req.params.id, function(err, campsite){
-		if (err) {
-			console.log(err);
-		} else {
-			res.render("comments/new", {campsite: campsite});
-		}
-	});
-});
-
-//Create route
-app.post("/campsites/:id/comments", isLoggedIn, function(req, res) {
-	Campsite
-	.findById(req.params.id, function(err, campsite){
-		if (err) {
-			console.log(err);
-			res.redirect("/campsites");
-		} else {
-			Comment.create({
-			text: req.body.text,
-			author: req.body.author
-			},function(err,comment){
-				if (err) {console.log(err)} else {
-					console.log("Successfully created posted comment.");
-					campsite.comments.push(comment);
-					campsite.save(function(err, campsite){
-						var URL = "/campsites/"+campsite._id;
-						res.redirect(URL); 
-					});
-				}
-			});
-		}
-	});
-});
-
-//===========
-//AUTH ROUTES
-//===========
-
-//Register form route
-app.get("/register", function(req, res){
-	res.render("register");
-});
-
-//Sign up post route
-app.post("/register", function(req, res){
-	User.register(new User({username: req.body.username}), req.body.password, function(err, user){
-		if(err){
-			console.log(err);
-			res.render("register");
-		} 
-		passport.authenticate("local")(req, res, function(){
-			res.redirect("/campsites");
-		});
-	});
-});
-
-//GET login form
-app.get("/login", function(req, res){
-	res.render("login");
-});
-
-//Log in post route
-app.post("/login", passport.authenticate("local", 
-	{
-		successRedirect: "/campsites",
-		failureRedirect: "/login"
-	}), function(req, res){
-		
-});
-
-//Log out route
-app.get("/logout", function(req, res){
-	req.logout();
-	res.redirect("/campsites");
-});
-
-//==========================================================
-
-//Wildcard route
-app.get("*", function(req, res){
-	res.send("This page is unavailable, please check your URL.");
-});
-
-//==========
-//MIDDLEWARE
-//==========
-
-function isLoggedIn(req, res, next){
-	if(req.isAuthenticated()){
-		return next();
-	}
-	res.redirect("/login");
-}
+app.use("/campsites/:id/comments", commentRoutes);
+app.use("/campsites", campsiteRoutes);
+app.use("/", indexRoutes);
 
 //=======
 //SERVER
