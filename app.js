@@ -19,9 +19,9 @@ app.get("/", function(req, res){
     res.render("home");
 });
 
-/*
-	**CAMPSITE ROUTES**
-*/
+//===============
+//CAMPSITE ROUTES
+//===============
 
 //Index route
 app.get("/campsites", function(req, res){
@@ -69,9 +69,9 @@ app.get("/campsites/:id", function(req, res){
 	});
 });
 
-/*
-	**COMMENT ROUTES**
-*/
+//===============
+//COMMENT ROUTES
+//===============
 
 //New route
 app.get("/campsites/:id/comments/new", function(req, res){
