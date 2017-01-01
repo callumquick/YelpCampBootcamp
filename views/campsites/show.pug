@@ -21,6 +21,8 @@ block body
 						a(href="#")
 							h3.black= campsite.name
 						p= campsite.description
+						p= "Submitted by "
+							a(href="#")=campsite.author.username 
 		h3#commentHeader Comments 
 			i.fa.fa-comments
 		a.btn.btn-success#addCommentBtn(href="/campsites/"+campsite._id+"/comments/new") Add Comment 
